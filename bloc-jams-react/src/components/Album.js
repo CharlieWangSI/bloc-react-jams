@@ -35,18 +35,35 @@ class Album extends Component {
      this.setState({ currentSong: song });
    }
 
+   handleSongHover(song){
+     this.setState({ currentHover: song })
+   }
+
    handleSongClick(song) {
      const isSameSong = this.state.currentSong === song;
      if (this.state.isPlaying && isSameSong) {
        this.pause();
      } else {
-       if (!isSameSong) { this.setSong(song); } 
+       if (!isSameSong) { this.setSong(song); }
        this.play();
      }
    }
 
 
    render() {
+     let button;
+
+     if (this.state.currentSong == song && this.state.isPlaying){
+       button=<ion-icon name="pause"></ion-icon>;
+     }else if (this.state.currentSong == song && ! this.state.isPlaying){
+       button=<ion-icon name="play"></ion-icon>;
+     }else if (this.state.currentHover == song){
+       button=<ion-icon name="play"></ion-icon>;
+     }else {
+       button=<span>{index+1}</span>
+     }
+
+
      return (
        <section className="album">
        <section id="album-info">
@@ -67,8 +84,10 @@ class Album extends Component {
            {
              this.state.album.songs.map(
                (song,index) =>
-               <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-               <td>{index+1}</td>
+               <tr className="song" key={index} onMouseEnter={() => this.handleSongHover(index)} onClick={() => this.handleSongClick(song)} onMouseEnter={()=> this.handleSongHover(song)} >
+               <td>
+                 {button}
+               </td>
                <td>{song.title}</td>
                <td>{song.duration}</td>
                </tr>
@@ -81,5 +100,16 @@ class Album extends Component {
    }
  }
 
-
  export default Album;
+
+ // {this.state.currentSong == song && this.state.isPlaying}?(
+ //   <ion-icon name="pause"></ion-icon>
+ // ):
+ // {this.state.currentSong == song && ! this.state.isPlaying}?(
+ //   <ion-icon name="play"></ion-icon>
+ // ):
+ // {this.state.currentHover == song ? (
+ //   <ion-icon name="play"></ion-icon>
+ // ):(
+ //   <span>{index+1}</span>
+ // )}

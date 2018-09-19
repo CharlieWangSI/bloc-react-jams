@@ -49,20 +49,23 @@ class Album extends Component {
      }
    }
 
-
-   render() {
+   playButton(song,index){
      let button;
 
-     if (this.state.currentSong == song && this.state.isPlaying){
+     if (this.state.currentSong === song && this.state.isPlaying){
        button=<ion-icon name="pause"></ion-icon>;
-     }else if (this.state.currentSong == song && ! this.state.isPlaying){
+     }else if (this.state.currentSong === song && ! this.state.isPlaying){
        button=<ion-icon name="play"></ion-icon>;
-     }else if (this.state.currentHover == song){
+     }else if (this.state.currentHover === song){
        button=<ion-icon name="play"></ion-icon>;
      }else {
        button=<span>{index+1}</span>
      }
+     }
+   }
 
+
+   render(){
 
      return (
        <section className="album">
@@ -86,7 +89,8 @@ class Album extends Component {
                (song,index) =>
                <tr className="song" key={index} onMouseEnter={() => this.handleSongHover(index)} onClick={() => this.handleSongClick(song)} onMouseEnter={()=> this.handleSongHover(song)} >
                <td>
-                 {button}
+                 {this.playButton(song, index)}
+                 <button>
                </td>
                <td>{song.title}</td>
                <td>{song.duration}</td>

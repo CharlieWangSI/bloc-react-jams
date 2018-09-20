@@ -61,7 +61,8 @@ class Album extends Component {
      }else {
        button=<span>{index+1}</span>
      }
-     }
+
+     return button;
    }
 
 
@@ -87,10 +88,9 @@ class Album extends Component {
            {
              this.state.album.songs.map(
                (song,index) =>
-               <tr className="song" key={index} onMouseEnter={() => this.handleSongHover(index)} onClick={() => this.handleSongClick(song)} onMouseEnter={()=> this.handleSongHover(song)} >
+               <tr className="song" key={index} onMouseEnter={() => this.handleSongHover(song)} onClick={() => this.handleSongClick(song)} >
                <td>
                  {this.playButton(song, index)}
-                 <button>
                </td>
                <td>{song.title}</td>
                <td>{song.duration}</td>

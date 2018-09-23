@@ -124,7 +124,7 @@ class Album extends Component {
      let timeString;
 
      if (time>60){
-       timeString=Math.floor({time/60}).toString()+":"+{time-60*Math.floor({time/60})}.toString()
+       timeString=Math.floor(time/60).toString()+":"+(time-60*Math.floor(time/60)).toString()
      }else if (time<=60){
        timeString=time.toString()
      }else{
@@ -140,7 +140,7 @@ class Album extends Component {
      return (
        <section className="album">
        <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
+          <img id="album-cover-art" src={this.state.album.albumhover} alt={this.state.album.title}/>
          <div className="album-details">
          <h1 id="album-title">{this.state.album.title}</h1>
            <h2 className="artist">{this.state.album.artist}</h2>
@@ -171,7 +171,7 @@ class Album extends Component {
          <PlayerBar
            isPlaying={this.state.isPlaying}
            currentSong={this.state.currentSong}
-           currentTime=this.formatTime({this.audioElement.currentTime})
+           currentTime={this.audioElement.currentTime}
            duration={this.audioElement.duration}
            currentVolume={this.state.currentVolume}
            handleSongClick={() => this.handleSongClick(this.state.currentSong)}

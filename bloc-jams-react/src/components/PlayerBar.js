@@ -15,6 +15,7 @@ import React, { Component } from 'react';
            <span><ion-icon name="skip-forward"></ion-icon></span>
          </button>
        </section>
+
        <section id="time-control">
        <div className="current-time">{this.props.currentTime}</div>
          <input
@@ -28,10 +29,18 @@ import React, { Component } from 'react';
          />
          <div className="total-time">{this.props.duration}</div>
        </section>
+
        <section id="volume-control">
-         <div className="icon ion-volume-low"></div>
-         <input type="range" className="seek-bar" value="80" />
-         <div className="icon ion-volume-high"></div>
+         <div className="current-volume">{this.props.currentVolume}</div>
+         <input
+           type="range"
+           className="seek-bar"
+           value={this.props.currentVolume}
+           max="10"
+           min="0"
+           step="0.01"
+           onChange={this.props.handleVolumeChange}
+         />
        </section>
        </section>
      );

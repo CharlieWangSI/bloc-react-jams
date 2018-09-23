@@ -36,7 +36,7 @@ import React, { Component } from 'react';
            type="range"
            className="seek-bar"
            value={this.props.currentVolume}
-           max="10"
+           max="1"
            min="0"
            step="0.01"
            onChange={this.props.handleVolumeChange}

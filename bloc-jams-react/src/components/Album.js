@@ -122,13 +122,14 @@ class Album extends Component {
 
    formatTime(time){
      let timeString;
+     let seconds = Math.floor(time % 60);
 
      if (time>60){
-       timeString=Math.floor(time/60).toString()+":"+(time-60*Math.floor(time/60)).toString()
+       timeString=Math.floor(time/60).toString()+((time%60)<10 ? ":0"+seconds.toString() : ":"+seconds.toString());
      }else if (time<=60){
-       timeString=time.toString()
+       timeString="00:"+(time<10 ? "0"+seconds.toString() : seconds.toString());
      }else{
-       timeString="-:--"
+       timeString="-:--";
    }
 
      return timeString;
@@ -136,11 +137,10 @@ class Album extends Component {
 
 
    render(){
-
      return (
        <section className="album">
        <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumhover} alt={this.state.album.title}/>
+          <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
          <div className="album-details">
          <h1 id="album-title">{this.state.album.title}</h1>
            <h2 className="artist">{this.state.album.artist}</h2>
@@ -172,6 +172,7 @@ class Album extends Component {
            isPlaying={this.state.isPlaying}
            currentSong={this.state.currentSong}
            currentTime={this.audioElement.currentTime}
+           formatTime={(time) => this.formatTime(time) }
            duration={this.audioElement.duration}
            currentVolume={this.state.currentVolume}
            handleSongClick={() => this.handleSongClick(this.state.currentSong)}

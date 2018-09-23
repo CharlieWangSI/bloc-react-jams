@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
  class PlayerBar extends Component {
+
+
    render() {
+
      return (
        <section className="player-bar">
        <section id="buttons">
@@ -27,7 +30,7 @@ import React, { Component } from 'react';
            step="0.01"
            onChange={this.props.handleTimeChange}
          />
-         <div className="total-time">{this.props.duration}</div>
+         <div className="total-time">{this.props.formatTime(this.props.duration)}</div>
        </section>
 
        <section id="volume-control">

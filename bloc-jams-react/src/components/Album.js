@@ -116,8 +116,22 @@ class Album extends Component {
 
    handleVolumeChange(e){
      const newVolume = e.target.value;
-     this.audioElement.currentVolume = newVolume;
+     this.audioElement.volume = newVolume;
      this.setState({currentVolume:newVolume});
+   }
+
+   formatTime(time){
+     let timeString;
+
+     if (time>60){
+       timeString=Math.floor({time/60}).toString()+":"+{time-60*Math.floor({time/60})}.toString()
+     }else if (time<=60){
+       timeString=time.toString()
+     }else{
+       timeString="-:--"
+   }
+
+     return timeString;
    }
 
 
@@ -157,7 +171,7 @@ class Album extends Component {
          <PlayerBar
            isPlaying={this.state.isPlaying}
            currentSong={this.state.currentSong}
-           currentTime={this.audioElement.currentTime}
+           currentTime=this.formatTime({this.audioElement.currentTime})
            duration={this.audioElement.duration}
            currentVolume={this.state.currentVolume}
            handleSongClick={() => this.handleSongClick(this.state.currentSong)}

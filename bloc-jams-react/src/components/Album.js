@@ -162,7 +162,7 @@ class Album extends Component {
                  {this.playButton(song, index)}
                </td>
                <td>{song.title}</td>
-               <td>{song.duration}</td>
+               <td>{this.formatTime(song.duration)}</td>
                </tr>
              )
            }
